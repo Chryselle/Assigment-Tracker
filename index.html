@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<b><title>Assignment Tracker</title></b>
+    <style>
+#grad1 {
+  height: 1080px;
+  background-image: linear-gradient(to left, rgba(86, 208, 200, 0.2), rgb(0, 107, 95));
+  h1: bold;
+}
+
+    </style>
+</head>
+<body>
+    
+<div id="grad1">
+	<center><h1>Assignment Tracker</h1>
+	<p>Add your assignments to keep track of them and sync with your Google Calendar.</p>
+
+	<form>
+		<label for="assignment-name">Assignment Name:</label>
+		<input type="text" id="assignment-name" name="assignment-name" required><br><br>
+
+		<label for="professor">Professor:</label>
+		<input type="text" id="professor" name="professor" required><br><br>
+
+		<label for="due-date">Due Date:</label>
+		<input type="date" id="due-date" name="due-date" required><br><br>
+
+		<label for="due-time">Due Time:</label>
+		<input type="time" id="due-time" name="due-time" required><br><br>
+
+		<label for="difficulty">Difficulty (1-10):</label>
+		<input type="number" id="difficulty" name="difficulty" min="1" max="10" required><br><br>
+
+		<button type="submit" id="add-assignment">Add Assignment</button>
+	</form>
+
+	<h2>Assignments</h2>
+	<table id="assignment-table">
+		<thead>
+			<tr>
+				<th>Assignment Name</th>
+				<th>Professor</th>
+				<th>Due Date</th>
+				<th>Due Time</th>
+				<th>Difficulty</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Assignment data will be added here dynamically -->
+		</tbody>
+	</table>
+
+	<br>
+	<button id="download-schedule">Download Assignment Schedule</button>
+	<button id="sync-with-calendar">Sync with Google Calendar</button>
+</center>
+
+	<script>
+		// Function to add a new assignment
+		function addAssignment(event) {
+			event.preventDefault(); // Prevent form submission
+			const name = document.getElementById('assignment-name').value;
+			const professor = document.getElementById('professor').value;
+			const dueDate = document.getElementById('due-date').value;
+			const dueTime = document.getElementById('due-time').value;
+			const difficulty = document.getElementById('difficulty').value;
+
+			// Add the new assignment to the table
+			const table = document.getElementById('assignment-table').getElementsByTagName('tbody')[0];
+			const row = table.insertRow();
+			const nameCell = row.insertCell(0);
+			const professorCell = row.insertCell(1);
+			const dateCell = row.insertCell(2);
+			const timeCell = row.insertCell(3);
+			const difficultyCell = row.insertCell(4);
+			nameCell.innerHTML = name;
+			professorCell.innerHTML = professor;
+			dateCell.innerHTML = dueDate;
+			timeCell.innerHTML = dueTime;
+			difficultyCell.innerHTML = difficulty;
+
+			// Clear the form fields
+			document.getElementById('assignment-name').value = '';
+			document.getElementById('professor').value = '';
+			document.getElementById('due-date').value = '';
+			document.getElementById('due-time').value = '';
+			document.getElementById('difficulty').value = '';
+		}
+
+		// Function to download the assignment schedule
+		function downloadSchedule() {
+			window.location.href = '/download_schedule'; // Replace with the URL of your download endpoint
+		}
+
+		// Function to sync with Google Calendar
+		function syncWithCalendar() {
+			alert('Syncing with Google Calendar...'); // Replace with your 
+        }
+
+// Add event listeners to the buttons
+document.getElementById('add-assignment').addEventListener('click', addAssignment);
+document.getElementById('download-schedule').addEventListener('click', downloadSchedule);
+document.getElementById('sync-with-calendar').addEventListener('click', syncWithCalendar);
+</script>
+
+</div>
+</body>
+</html>
+
